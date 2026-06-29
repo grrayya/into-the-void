@@ -7,6 +7,6 @@ Grief often comes with words we never got to say. This project relies on the phy
 When you type a message and click "Release", the text is not saved to any database or local storage. Instead, it triggers an animation where the words blur and shatter into ashes that "drift upward into the void", before being permanently deleted from the computer's memory.
 
 
-* **100% Private:** No backend, no databases, no tracking. Everything happens entirely on your local machine.
+* **100% Private:** No backend, no databases, no tracking.
 * **Ephemeral:** Once the text dissolves, it is gone forever.
 * **Procedural Animation:** The volume of "ash" particles generated is directly proportional to how many words you typed.
