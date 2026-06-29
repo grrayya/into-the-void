@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Into the Void</title>
-</head>
     <style>
         body {
             margin: 0; padding: 0;
@@ -51,6 +50,7 @@
             opacity: 0; filter: blur(12px);
         }
     </style>
+</head>
 <body>
 
     <canvas id="voidCanvas"></canvas>
@@ -60,5 +60,97 @@
         <button id="releaseBtn">Release</button>
     </div>
 
+    <script>
+        const canvas = document.getElementById('voidCanvas');
+        const ctx = canvas.getContext('2d');
+        const uiContainer = document.getElementById('ui-container');
+        const messageInput = document.getElementById('message');
+        const releaseBtn = document.getElementById('releaseBtn');
+
+        let width, height;
+        let particles = [];
+        let isAnimating = false;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 1.5; 
+                this.speedY = Math.random() * -2 - 0.5; 
+                this.opacity = 1;
+                this.fadeRate = Math.random() * 0.015 + 0.005; 
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity -= this.fadeRate;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(220, 220, 220, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // --- NEW LOGIC BELOW ---
+
+        // Generates the particles based on text length
+        function createParticles() {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const textLength = messageInput.value.length;
+            const particleCount = Math.min(Math.max(textLength * 3, 50), 800);
+
+            for (let i = 0; i < particleCount; i++) {
+                const x = centerX + (Math.random() - 0.5) * Math.min(width * 0.8, 600);
+                const y = centerY + (Math.random() - 0.5) * 250;
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        // The animation loop that draws the particles moving upward
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            let activeParticles = false;
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].opacity > 0) activeParticles = true;
+            }
+
+            if (activeParticles) {
+                requestAnimationFrame(animate);
+            } else {
+                // Reset everything once particles fade away
+                isAnimating = false;
+                particles = [];
+                messageInput.value = ''; 
+                uiContainer.classList.remove('dissolve'); 
+            }
+        }
+
+        // The trigger that starts the whole process when the button is clicked
+        releaseBtn.addEventListener('click', () => {
+            if (messageInput.value.trim() === '' || isAnimating) return;
+            
+            isAnimating = true;
+            uiContainer.classList.add('dissolve');
+            
+            setTimeout(() => {
+                createParticles();
+                animate();
+            }, 600); 
+        });
+    </script>
 </body>
 </html>
