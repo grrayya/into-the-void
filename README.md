@@ -7,6 +7,8 @@ Grief often comes with words we never got to say. This project relies on the phy
 When you type a message and click "Release", the text is not saved to any database or local storage. Instead, it triggers an animation where the words blur and shatter into ashes that "drift upward into the void", before being permanently deleted from the computer's memory.
 
 
-* **100% Private:** No backend, no databases, no tracking.
-* **Ephemeral:** Once the text dissolves, it is gone forever.
+* **100% Private:** No backend, no databases, no tracking, nothing at all man. Once the text dissolves, it is gone forever.
 * **Procedural Animation:** The volume of "ash" particles generated is directly proportional to how many words you typed.
+
+## why i built it 
+recently i had been very sad and defeated and remosfula nd regreatfull, most the of the feeelings that come with grief, In Greek mythology, King Midas's barber discovered a heavy secret he was forbidden to share. Unable to hold it in, he dug a hole in the ground, whispered the words to relieve his burden, and buried it forever. i wwanted to make a program taht was similar to this idea. 
