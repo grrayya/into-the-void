@@ -13,5 +13,12 @@ When you type a message and click "Release", the text is not saved to any databa
 ## why i built it 
 recently i had been very sad and defeated and remosfula nd regreatfull, most the of the feeelings that come with grief, In Greek mythology, King Midas's barber discovered a heavy secret he was forbidden to share. Unable to hold it in, he dug a hole in the ground, whispered the words to relieve his burden, and buried it forever. i wwanted to make a program taht was similar to this idea. 
 
+**To run**
+1. Download 
+2. open it in any web browser (Chrome, Firefox, Safari, Edge).
+3. Type whatever and release it.
+
+*(Note: If you are a developer looking at the code, there are no `npm install` steps or build processes required. Just open the HTML file.)*
+
 <img width="2072" height="1240" alt="0260710_184919_Samsung_Notes" src="https://github.com/user-attachments/assets/53c61cfc-bd31-4bc8-8daf-1c980d2fee32" />
 
