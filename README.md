@@ -18,7 +18,6 @@ recently i had been very sad and defeated and remosfula nd regreatfull, most the
 2. open it in any web browser (Chrome, Firefox, Safari, Edge).
 3. Type whatever and release it.
 
-*(Note: If you are a developer looking at the code, there are no `npm install` steps or build processes required. Just open the HTML file.)*
 
 <img width="2072" height="1240" alt="0260710_184919_Samsung_Notes" src="https://github.com/user-attachments/assets/53c61cfc-bd31-4bc8-8daf-1c980d2fee32" />
 
