@@ -40,10 +40,14 @@
             background: #222; color: #fff; border-color: #fff;
         }
 
+        button:disabled {
+            opacity: 0.4; cursor: default;
+        }
+
         canvas {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%; z-index: 1;
-            pointer-events: none; 
+            pointer-events: none;
         }
 
         .dissolve {
@@ -83,10 +87,10 @@
                 this.x = x;
                 this.y = y;
                 this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 1.5; 
-                this.speedY = Math.random() * -2 - 0.5; 
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = Math.random() * -2 - 0.5;
                 this.opacity = 1;
-                this.fadeRate = Math.random() * 0.015 + 0.005; 
+                this.fadeRate = Math.random() * 0.015 + 0.005;
             }
             update() {
                 this.x += this.speedX;
@@ -101,13 +105,11 @@
             }
         }
 
-        // --- NEW LOGIC BELOW ---
-
-        // Generates the particles based on text length
         function createParticles() {
             const centerX = width / 2;
             const centerY = height / 2;
             const textLength = messageInput.value.length;
+            // Cap at 800 so a wall of text doesn't tank the frame rate
             const particleCount = Math.min(Math.max(textLength * 3, 50), 800);
 
             for (let i = 0; i < particleCount; i++) {
@@ -117,10 +119,9 @@
             }
         }
 
-        // The animation loop that draws the particles moving upward
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            
+
             let activeParticles = false;
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
@@ -131,25 +132,25 @@
             if (activeParticles) {
                 requestAnimationFrame(animate);
             } else {
-                // Reset everything once particles fade away
                 isAnimating = false;
                 particles = [];
-                messageInput.value = ''; 
-                uiContainer.classList.remove('dissolve'); 
+                messageInput.value = '';
+                uiContainer.classList.remove('dissolve');
+                releaseBtn.disabled = false;
             }
         }
 
-        // The trigger that starts the whole process when the button is clicked
         releaseBtn.addEventListener('click', () => {
             if (messageInput.value.trim() === '' || isAnimating) return;
-            
+
             isAnimating = true;
+            releaseBtn.disabled = true; // block double-clicks mid-animation
             uiContainer.classList.add('dissolve');
-            
+
             setTimeout(() => {
                 createParticles();
                 animate();
-            }, 600); 
+            }, 600);
         });
     </script>
 </body>
