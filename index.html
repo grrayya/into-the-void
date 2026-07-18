@@ -109,7 +109,6 @@
             const centerX = width / 2;
             const centerY = height / 2;
             const textLength = messageInput.value.length;
-            // Cap at 800 so a wall of text doesn't tank the frame rate
             const particleCount = Math.min(Math.max(textLength * 3, 50), 800);
 
             for (let i = 0; i < particleCount; i++) {
@@ -144,13 +143,20 @@
             if (messageInput.value.trim() === '' || isAnimating) return;
 
             isAnimating = true;
-            releaseBtn.disabled = true; // block double-clicks mid-animation
+            releaseBtn.disabled = true;
             uiContainer.classList.add('dissolve');
 
             setTimeout(() => {
                 createParticles();
                 animate();
             }, 600);
+        });
+
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                releaseBtn.click();
+            }
         });
     </script>
 </body>
